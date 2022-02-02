@@ -51,6 +51,20 @@ https://docs.docker.com/compose/install/
 - 方式1：任意目录下执行 onekey start 命令
 - 方式2：直接执行当前项目目录下的 one-key-start.sh 脚本
 
+### 1.4 启动状态查看
+
+检查docker list状态，发现下述8个容器状态正常则表示启动正常。
+
+![image](https://user-images.githubusercontent.com/5603342/152224931-e021ec67-401c-45d5-a03e-caed67006ba2.png)
+
+seata在nacos上的注册信息
+![image](https://user-images.githubusercontent.com/5603342/152242858-158796bc-d3fe-4ad1-b2bf-dda3324d8744.png)
+
+
+seata在nacos上的配置信息
+![image](https://user-images.githubusercontent.com/5603342/152242665-e5208d92-c69a-49f5-9a37-44c65a4ae676.png)
+
+
 
 ### 1.4 onekey 命令行参数说明
 
