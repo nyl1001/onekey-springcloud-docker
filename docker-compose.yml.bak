@@ -45,8 +45,8 @@ services:
       - NACOS_MYSQL_PORT=${NACOS_MYSQL_PORT}
       - SEATA_MYSQL_PORT=${SEATA_MYSQL_PORT}
     volumes:
-      - /usr/local/docker/data/nacos/logs:/home/nacos/logs
-      - /usr/local/docker/data/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+      - ./nacos/logs:/home/nacos/logs
+      - ./nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     depends_on:
