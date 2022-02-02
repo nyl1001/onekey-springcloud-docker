@@ -1,0 +1,15 @@
+.idea
+kafka/logs/*
+minio/config/*
+minio/data/*
+mysql-for-nacos/data/*
+mysql-for-seata/data/*
+nacos/logs/*
+nacos/init.d/*
+redis/data/*
+seata/data/*
+seata/logs/*
+zookeeper/data/*
+.env
+docker-compose.yml
+seata/conf/registry.conf

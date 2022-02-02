@@ -1,0 +1,176 @@
+# 请根据docker-compose版本选择2/3
+version: "3"
+
+services:
+  mysql-for-nacos-onekey-standalone:
+    container_name: mysql-for-nacos-onekey-standalone
+    image: nacos/nacos-mysql:5.7
+    env_file:
+      - ./env/mysql-for-nacos.env
+    volumes:
+      - ./mysql-for-nacos/data:/var/lib/mysql
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3307:3306"
+
+  nacos-onekey-standalone-s:
+    container_name: nacos-onekey-standalone
+    #    image: nacos/nacos-server
+    build: ./nacos
+    #    image: nacos/nacos-server:${NACOS_VERSION}
+    privileged: true
+    restart: always
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9555:9555"
+    environment:
+      - JVM_XMS=256m
+      - JVM_XMX=256m
+      - MODE=standalone
+      - PREFER_HOST_MODE=hostname
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - HOST_IP=${HOST_IP}
+      - MYSQL_SERVICE_HOST=${HOST_IP}
+      - MYSQL_SERVICE_DB_NAME=nacos_devtest
+      - MYSQL_SERVICE_PORT=3307
+      - MYSQL_SERVICE_USER=nacos
+      - MYSQL_SERVICE_PASSWORD=nacos
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+      - COMMON_NACOS_NAMESPACE=${COMMON_NACOS_NAMESPACE}
+      - COMMON_NACOS_PORT=${COMMON_NACOS_PORT}
+      - NACOS_STATUS_CHECK_KEY=${NACOS_STATUS_CHECK_KEY}
+      - COMMON_NACOS_GROUP=${COMMON_NACOS_GROUP}
+      - NACOS_MYSQL_PORT=${NACOS_MYSQL_PORT}
+      - SEATA_MYSQL_PORT=${SEATA_MYSQL_PORT}
+    volumes:
+      - /usr/local/docker/data/nacos/logs:/home/nacos/logs
+      - /usr/local/docker/data/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - mysql-for-nacos-onekey-standalone
+
+  redis-onekey-standalone:
+    image: redis:latest
+    restart: always
+    container_name: redis-onekey-standalone
+    command:
+      - /bin/bash
+      - -c
+      - redis-server /usr/local/bin/redis.conf/redis.conf --requirepass "123456"
+    privileged: true
+    ports:
+      - "0.0.0.0:6380:6379"
+    volumes:
+      - ./redis/data:/data
+      - ./redis/redis.conf:/usr/local/bin/redis.conf/redis.conf
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  zookeeper-onekey-standalone:
+    image: zookeeper:latest
+    container_name: zookeeper-onekey-standalone
+    restart: always
+    volumes:
+      - ./zookeeper/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 2181:2181
+
+  kafka-onekey-standalone:
+    image: wurstmeister/kafka
+    container_name: kafka-onekey-standalone
+    restart: always
+    ports:
+      - 9082:9092
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST_IP}:9082
+      KAFKA_CREATE_TOPICS: "onekey:2:1"   #kafka启动后初始化一个有2个partition(分区)1个副本名叫onekey的topic
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-onekey-standalone:2181
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    volumes:
+      - ./kafka/logs:/kafka
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - zookeeper-onekey-standalone
+
+  mysql-for-seata-onekey-standalone:
+    image: 'mysql/mysql-server:5.7'
+    restart: always
+    container_name: mysql-for-seata-onekey-standalone
+    volumes:
+      - ./mysql-for-seata/data:/var/lib/mysql
+      - ./mysql-for-seata/config/my.cnf:/etc/my.cnf
+      - ./mysql-for-seata/config/init.d:/docker-entrypoint-initdb.d
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3308:3306'
+
+  seata-server-onekey-standalone:
+#    image: seataio/seata-server:1.4.2
+    build: ./seata
+    container_name: seata-server-onekey-standalone
+    hostname: seata-server
+    #    networks:
+    #      - seata-server
+    ports:
+      - "8091:8091"
+    environment:
+      #宿主机ip
+      - SEATA_PORT=8091
+      - STORE_MODE=db
+      - SEATA_IP=${HOST_IP}
+      - HOST_IP=${HOST_IP}
+      - COMMON_NACOS_NAMESPACE=${COMMON_NACOS_NAMESPACE}
+      - COMMON_NACOS_PORT=${COMMON_NACOS_PORT}
+      - NACOS_STATUS_CHECK_KEY=${NACOS_STATUS_CHECK_KEY}
+      - COMMON_NACOS_GROUP=${COMMON_NACOS_GROUP}
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    privileged: true
+
+    volumes:
+      - ./seata/conf:/root/seata-config
+      - ./libs/mysql-connector-java-8.0.21.jar:/seata-server/libs/mysql-connector-java-8.0.21.jar
+      - ./seata/logs:/root/logs/seata
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - mysql-for-seata-onekey-standalone
+      - nacos-onekey-standalone-s
+
+  minio-onekey-standalone:
+    image: minio/minio:RELEASE.2020-09-26T03-44-56Z
+    container_name: minio-onekey-standalone
+    restart: always
+    privileged: true
+    #    networks:
+    #      - seata-server
+    labels:
+      - maintainer=MinIO Inc <dev@min.io>
+    ports:
+      - 9000:9000 # api 端口
+      - 9001:9001 # 控制台端口
+    command: server /data #指定容器中的目录 /data
+    environment:
+      - MINIO_ACCESS_KEY=GODjtlhGfUm1AHnIT69aXGYOk85s1Jpo    #管理后台用户名
+      - MINIO_SECRET_KEY=2Era048wziYSq1RRafn9ln1Qqu9TeZoO    #管理后台密码，最小8个字符
+      - MINIO_UPDATE=off
+      - MINIO_ACCESS_KEY_FILE=access_key
+      - MINIO_SECRET_KEY_FILE=secret_key
+      - MINIO_KMS_MASTER_KEY_FILE=kms_master_key
+      - MINIO_SSE_MASTER_KEY_FILE=sse_master_key
+      - NACOS_MYSQL_PORT=${NACOS_MYSQL_PORT}
+      - SEATA_MYSQL_PORT=${SEATA_MYSQL_PORT}
+
+    volumes:
+      - ./minio/data:/data              #映射当前目录下的data目录至容器内/data目录
+      - ./minio/config:/root/.minio/     #映射配置目录
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
