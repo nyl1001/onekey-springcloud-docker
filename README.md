@@ -1,5 +1,6 @@
 # 一键部署spring cloud基础开发环境（无缝整合nacos、seata、zookeeper、kalfka、minio）
 **注意:** 目前仅支持 Mac 与 Linux两种系统
+
 由于spring cloud基础开发环境的搭建和配置较为繁琐，依赖项众多，而目前市面上相关的指导文档层次不齐，
 给开发人员带来极大不便，从而导致较高的学习成本和开发成本，本人因工作和个人兴趣原因，近期对spring cloud开发环境进行了docker容器编排的整合，
 支持一键式配置和启动spring cloud的docker开发环境，希望能给有需要的同学带来帮助。
@@ -12,41 +13,43 @@
 
 对于linux系统可以在本项目根目录下执行下列脚本:
 ```
-cd到当前目录下执行如下脚本
+cd到当前项目根目录下执行如下脚本
 ./init.sh
 ```
 
 用户也可通过如下方式手动设置该环境变量
 ```
 linux环境配置方法如下：
-cd onekey-docker项目根目录
+cd onekey-springcloud-docker项目根目录
 echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.profile && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.profile && source ~/.profile
 
 mac os环境配置方法如下：
-cd onekey-docker项目根目录
+cd onekey-springcloud-docker项目根目录
 echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.zshrc && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.zshrc && source ~/.zshrc
 或者
-cd onekey-docker项目根目录
+cd onekey-springcloud-docker项目根目录
 echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.bashrc && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.bashrc && source ~/.bashrc
 或者
-cd onekey-docker项目根目录
+cd onekey-springcloud-docker项目根目录
 echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.zshrc.pre-oh-my-zsh && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.zshrc.pre-oh-my-zsh && source ~/.zshrc.pre-oh-my-zsh
 
 ```
 
 ### 1.2 依赖环境准备
 - docker
+
 docker的安装指南请移步官网：
 https://www.docker.com/get-started
 
 - docker compose
+
 docker-compose的安装指南请移步官网：
 https://docs.docker.com/compose/install/
 
 ### 1.3 启动
-当环境变量设置完毕后，可以通过如下方式启动容器：
+当环境变量设置和docker-compose执行环境安装完毕后，可以通过如下方式启动容器：
 - 方式1：任意目录下执行 onekey start 命令
-- 方式2：直接执行当前目录下的 one-key-start.sh 命令
+- 方式2：直接执行当前项目目录下的 one-key-start.sh 脚本
 
 
 ### 1.4 onekey 命令行参数说明
