@@ -13,3 +13,4 @@ zookeeper/data/*
 .env
 docker-compose.yml
 seata/conf/registry.conf
+**/.DS_Store
