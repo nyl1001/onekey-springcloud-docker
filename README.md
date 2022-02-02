@@ -4,9 +4,9 @@
 给开发人员带来极大不便，从而导致较高的学习成本和开发成本，本人因工作和个人兴趣原因，近期对spring cloud开发环境进行了docker容器编排的整合，
 支持一键式配置和启动spring cloud的docker开发环境，希望能给有需要的同学带来帮助。
 
-## 安装与启动
+## 1 安装与启动
 
-### 首次安装
+### 1.1 首次安装
 
 首次安装需要配置环境变量ONEKEY_ENV_PATH
 
@@ -34,13 +34,22 @@ echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.zshrc.pre-oh-my-zsh && echo 'export PAT
 
 ```
 
-### 启动
+### 1.2 依赖环境准备
+- docker
+docker的安装指南请移步官网：
+https://www.docker.com/get-started
+
+- docker compose
+docker-compose的安装指南请移步官网：
+https://docs.docker.com/compose/install/
+
+### 1.3 启动
 当环境变量设置完毕后，可以通过如下方式启动容器：
 - 方式1：任意目录下执行 onekey start 命令
 - 方式2：直接执行当前目录下的 one-key-start.sh 命令
 
 
-### onekey 命令参数说明
+### 1.4 onekey 命令行参数说明
 
 ```
 // docker简单命令列表
@@ -55,7 +64,7 @@ onekey help        显示所有的命令列表
 
 ```
 
-## 配置注意事项
+## 2 配置注意事项
 
 - 原则上配置文件.env-default和seata/conf/registry-default.conf不要做任何修改。
 
@@ -90,16 +99,15 @@ onekey help        显示所有的命令列表
 - seata/conf/registry.conf:21:
 - docker-compose.yml:25
 
-## 部分重点细节说明
+## 3 部分重点细节说明
 1. nacos和seata容器镜像均进行了一定程度的自定义改造。其进行自定义的主要原因是：
-- seata采用了nacos方式进行服务注册和服务发现，并且seata的配置参数也是通过nacos进行配置和获取，这样在nacos启动之后需要立即导入seata的配置信息。
-- nacos的启动过程较长，而seata的启动依赖nacos，因此需要在检查确认nacos启动成功并且seata的配置信息全部同步到nacos后才能启动。
+    - seata采用了nacos方式进行服务注册和服务发现，并且seata的配置参数也是通过nacos进行配置和获取，这样在nacos启动之后需要立即导入seata的配置信息。
+    - nacos的启动过程较长，而seata的启动依赖nacos，因此需要在检查确认nacos启动成功并且seata的配置信息全部同步到nacos后才能启动。
 
 2. kafka采用了zookeeper进行服务注册和发现。
 
 3. nacos使用mysql5.7作数据持久化，这里用户可以根据情况改成mysql8。
 
 4. mysql-for-seata容器为seata提供数据持久化，mysql-for-seata容器在启动时会初始化seata所依赖的数据表结构并生成默认的seata访问账号。
-
 
 
