@@ -1,4 +1,4 @@
-# 一键启动spring cloud基础开发环境（无缝整合nacos、seata、zookeeper、kalfka、minio）
+# 一键部署spring cloud基础开发环境（无缝整合nacos、seata、zookeeper、kalfka、minio）
 **注意:** 目前仅支持 Mac 与 Linux两种系统
 由于spring cloud基础开发环境的搭建和配置较为繁琐，依赖项众多，而目前市面上相关的指导文档层次不齐，
 给开发人员带来极大不便，从而导致较高的学习成本和开发成本，本人因工作和个人兴趣原因，近期对spring cloud开发环境进行了docker容器编排的整合，
