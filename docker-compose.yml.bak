@@ -19,6 +19,7 @@ services:
     container_name: nacos-onekey-standalone
     #    image: nacos/nacos-server
     build: ./nacos
+    image: onekey_custom/nacos-server:1.0
     #    image: nacos/nacos-server:${NACOS_VERSION}
     privileged: true
     restart: always
@@ -121,6 +122,7 @@ services:
   seata-server-onekey-standalone:
 #    image: seataio/seata-server:1.4.2
     build: ./seata
+    image: onekey_custom/seata-server:1.0
     container_name: seata-server-onekey-standalone
     hostname: seata-server
     restart: always
