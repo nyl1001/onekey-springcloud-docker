@@ -40,7 +40,8 @@ services:
       - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
       - COMMON_NACOS_NAMESPACE=${COMMON_NACOS_NAMESPACE}
       - COMMON_NACOS_PORT=${COMMON_NACOS_PORT}
-      - NACOS_STATUS_CHECK_KEY=${NACOS_STATUS_CHECK_KEY}
+      - NACOS_STATUS_CHECK_KEY_FOR_SEATA=${NACOS_STATUS_CHECK_KEY_FOR_SEATA}
+      - NACOS_WAITING_TIME_BEFORE_MYSQL_STARTED=${NACOS_WAITING_TIME_BEFORE_MYSQL_STARTED}
       - COMMON_NACOS_GROUP=${COMMON_NACOS_GROUP}
       - NACOS_MYSQL_PORT=${NACOS_MYSQL_PORT}
       - SEATA_MYSQL_PORT=${SEATA_MYSQL_PORT}
@@ -118,6 +119,7 @@ services:
     build: ./seata
     container_name: seata-server-onekey-standalone
     hostname: seata-server
+    restart: always
     #    networks:
     #      - seata-server
     ports:
@@ -130,7 +132,7 @@ services:
       - HOST_IP=${HOST_IP}
       - COMMON_NACOS_NAMESPACE=${COMMON_NACOS_NAMESPACE}
       - COMMON_NACOS_PORT=${COMMON_NACOS_PORT}
-      - NACOS_STATUS_CHECK_KEY=${NACOS_STATUS_CHECK_KEY}
+      - NACOS_STATUS_CHECK_KEY_FOR_SEATA=${NACOS_STATUS_CHECK_KEY_FOR_SEATA}
       - COMMON_NACOS_GROUP=${COMMON_NACOS_GROUP}
       - SEATA_CONFIG_NAME=file:/root/seata-config/registry
     privileged: true

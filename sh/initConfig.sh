@@ -7,7 +7,8 @@ rootDir=$ONEKEY_ENV_PATH
 cp ${rootDir}/.env-default ${rootDir}/.env
 cp ${rootDir}/seata/conf/registry-default.conf ${rootDir}/seata/conf/registry.conf
 
-hostIp=$(/sbin/ifconfig -a | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' | tr -d "addr:")
+hostIp=$(/sbin/ifconfig -a | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' | tr -d "addr:" | sed 1q)
+echo "HOST_IP: $hostIp"
 
 sysType=$(uname -s)
 case $sysType in
