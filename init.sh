@@ -44,3 +44,5 @@ case $sysType in
 esac
 
 $OUTPUT "Seting Env ONEKEY_ENV_PATH $ONEKEY_ENV_PATH successfully..."
+
+onekey help

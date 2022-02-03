@@ -55,7 +55,7 @@ $OUTPUT "
   $BLUE$FLICKER Building a development environment for the onekey team using docker $TAILS
   $BLUE$FLICKER Support onekey project develop $TAILS
 
-  $YELLOW Docker Command: $TAILS
+  $YELLOW ONEKEY Docker Command: $TAILS
     $WHITE onekey build <config> $TAILS  build docker config.
     $WHITE onekey list $TAILS            show container list
     $WHITE onekey start $TAILS           start container
