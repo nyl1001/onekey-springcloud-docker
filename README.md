@@ -60,6 +60,7 @@ https://docs.docker.com/compose/install/
 seata在nacos上的注册信息
 ![image](https://user-images.githubusercontent.com/5603342/152242858-158796bc-d3fe-4ad1-b2bf-dda3324d8744.png)
 
+注意nacos管理后台默认账号为nacos，密码为nacos。
 
 seata在nacos上的配置信息
 ![image](https://user-images.githubusercontent.com/5603342/152242665-e5208d92-c69a-49f5-9a37-44c65a4ae676.png)
