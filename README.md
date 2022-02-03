@@ -66,7 +66,7 @@ seata在nacos上的配置信息
 
 
 
-### 1.4 onekey 命令行参数说明
+### 1.5 onekey 命令行参数说明
 
 ```
 // docker简单命令列表
