@@ -114,8 +114,6 @@ for line in $(cat /home/seata/config.txt | sed s/[[:space:]]//g); do
 	  addConfig "${key}" "${value}"
 done
 
-addConfig "nyl" "nyl"
-
 echo "========================================================================="
 echo " Complete initialization parameters,  total-count:$count ,  failure-count:$failCount "
 echo "========================================================================="
