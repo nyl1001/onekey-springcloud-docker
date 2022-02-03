@@ -1,5 +1,5 @@
 # 一键部署spring cloud基础开发环境（无缝整合nacos、seata、zookeeper、kalfka、minio）
-**注意:** 目前仅支持 Mac 与 Linux两种系统
+**注意:** 支持 Mac 与 Linux两种系统
 
 由于spring cloud基础开发环境的搭建和配置较为繁琐，依赖项众多，而目前市面上相关的指导文档参差不齐，
 给开发人员带来极大不便，从而导致较高的学习成本和开发成本，本人因工作和个人兴趣原因，近期对spring cloud开发环境进行了docker容器编排的整合，
@@ -93,7 +93,7 @@ onekey help        显示所有的命令列表
 
 - 不要修改被大括号{}标记的变量。
 
-## 端口占用情况
+## 3 端口占用情况
 运行命令 docker ps | grep onekey 即可查看
 - seata-server         0.0.0.0:8091->8091/tcp
 - kafka                0.0.0.0:9082->9092/tcp
@@ -116,7 +116,7 @@ onekey help        显示所有的命令列表
 - seata/conf/registry.conf:21:
 - docker-compose.yml:25
 
-## 3 部分重点细节说明
+## 4 部分重点细节说明
 1. nacos和seata容器镜像均进行了一定程度的自定义改造。其进行自定义的主要原因是：
     - seata采用了nacos方式进行服务注册和服务发现，并且seata的配置参数也是通过nacos进行配置和获取，这样在nacos启动之后需要立即导入seata的配置信息。
     - nacos的启动过程较长，而seata的启动依赖nacos，因此需要在检查确认nacos启动成功并且seata的配置信息全部同步到nacos后才能启动。
