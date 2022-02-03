@@ -43,6 +43,4 @@ case $sysType in
         ;;
 esac
 
-cp $ONEKEY_ENV_PATH/docker-compose.yml.bak $ONEKEY_ENV_PATH/docker-compose.yml
-
 $OUTPUT "Seting Env ONEKEY_ENV_PATH $ONEKEY_ENV_PATH successfully..."
