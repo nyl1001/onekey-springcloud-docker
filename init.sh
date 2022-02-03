@@ -7,7 +7,7 @@ ONEKEY_ENV_PATH=`(pwd)`
 sysType=$(uname -s)
 case $sysType in
     "Linux")
-        isStringInFile "ONEKEY_ENV_PATH" "~/.profile"
+        isStringInFile ONEKEY_ENV_PATH ~/.profile
         if [ $? = 0 ]; then
             echo export ONEKEY_ENV_PATH="$ONEKEY_ENV_PATH" >> ~/.profile && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.profile
         fi
