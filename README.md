@@ -11,7 +11,7 @@
 
 首次安装需要配置环境变量ONEKEY_ENV_PATH
 
-对于linux系统可以在本项目根目录下执行下列脚本:
+对于linux/mac os系统可以在本项目根目录下执行下列脚本:
 ```
 cd到当前项目根目录下执行如下脚本
 ./init.sh
@@ -31,7 +31,7 @@ cd onekey-springcloud-docker项目根目录
 echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.bashrc && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.bashrc && source ~/.bashrc
 或者
 cd onekey-springcloud-docker项目根目录
-echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.zshrc.pre-oh-my-zsh && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.zshrc.pre-oh-my-zsh && source ~/.zshrc.pre-oh-my-zsh
+echo export ONEKEY_ENV_PATH=$(pwd) >> ~/.zshrc.pre-oh-my-zsh && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.zshrc.pre-oh-my-zsh && source ~/.zshrc
 
 ```
 
