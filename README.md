@@ -119,7 +119,7 @@ onekey help        显示所有的命令列表
 ## 4 部分重点细节说明
 1. nacos和seata容器镜像均进行了一定程度的自定义改造。其进行自定义的主要原因是：
     - seata采用了nacos方式进行服务注册和服务发现，并且seata的配置参数也是通过nacos进行配置和获取，这样在nacos启动之后需要立即导入seata的配置信息。
-    - nacos的启动过程较长，而seata的启动依赖nacos，因此需要在检查确认nacos启动成功并且seata的配置信息全部同步到nacos后才能启动。
+    - nacos的启动过程较长，而seata的启动依赖nacos，因此需要在检查确认nacos启动成功并且seata的配置信息全部同步到nacos后seata才能启动。
 
 2. seata 镜像基于seata-server 1.4.2构建。
 
