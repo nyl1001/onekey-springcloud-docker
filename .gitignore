@@ -14,3 +14,4 @@ zookeeper/data/*
 docker-compose.yml
 seata/conf/registry.conf
 **/.DS_Store
+running.log

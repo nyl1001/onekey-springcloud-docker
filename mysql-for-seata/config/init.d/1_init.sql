@@ -8,7 +8,7 @@ create table `global_table` (
   `transaction_id` bigint,
   `status` tinyint not null,
   `application_id` varchar(32),
-  `transaction_service_group` varchar(32),
+  `transaction_service_group` varchar(128),
   `transaction_name` varchar(128),
   `timeout` int,
   `begin_time` bigint,
@@ -57,3 +57,4 @@ create table `lock_table` (
 CREATE USER 'seata'@'%' IDENTIFIED BY 'seata';
 GRANT All privileges ON *.* TO 'seata'@'%';
 flush privileges;
+alter table global_table modify column transaction_service_group varchar(128);
