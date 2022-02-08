@@ -1,3 +1,4 @@
+-- reference : https://github.com/seata/seata/blob/develop/script/server/db/mysql.sql
 CREATE DATABASE seata;
 USE seata;
 

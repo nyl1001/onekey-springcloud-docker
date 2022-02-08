@@ -3,6 +3,7 @@
 transport.type=TCP
 transport.server=NIO
 transport.heartbeat=true
+transport.enableClientBatchSendRequest=true
 transport.enableTmClientBatchSendRequest=false
 transport.enableRmClientBatchSendRequest=true
 transport.enableTcServerBatchSendResponse=false
