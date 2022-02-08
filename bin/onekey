@@ -2,8 +2,6 @@
 
 . $ONEKEY_ENV_PATH/sh/color.sh
 
-onekey_env_path=$(echo "$ONEKEY_ENV_PATH")
-
 # check env path
 if [[ "$ONEKEY_ENV_PATH" == "" ]]
 then
