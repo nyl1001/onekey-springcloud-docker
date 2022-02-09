@@ -27,7 +27,7 @@ while read line; do
     key=${line%=*}
     value=${line#*=}
     case $key in
-        "COMMON_NACOS_NAMESPACE")
+        "COMMON_NACOS_NAMESPACE_FOR_SEATA")
             case $sysType in
                 "Linux")
                     sed -i "s/{nacosNamespaceVariale}/${value}/g" ${rootDir}/seata/conf/registry.conf
@@ -41,7 +41,7 @@ while read line; do
                     ;;
             esac
             ;;
-        "COMMON_NACOS_GROUP")
+        "COMMON_NACOS_GROUP_FOR_SEATA")
             case $sysType in
                 "Linux")
                     sed -i "s/{nacosGroupVariale}/${value}/g" ${rootDir}/seata/conf/registry.conf
