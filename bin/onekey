@@ -14,37 +14,42 @@ command=$1
 
 case $command in
   "build" )
-    $OUTPUT "$RED  Build the docker config $TAILS\n"
-    bash $ONEKEY_ENV_PATH/sh/docker/build.sh $2
+    $OUTPUT "$RED  Build the docker config and rebuild all docker images $TAILS\n"
+    bash $ONEKEY_ENV_PATH/sh/docker/build.sh
     exit
   ;;
   "start" )
-    $OUTPUT "$RED  Start the docker container $TAILS\n"
+    $OUTPUT "$RED  Start all docker containers $TAILS\n"
     bash $ONEKEY_ENV_PATH/sh/docker/start.sh
     exit
   ;;
   "restart" )
-    $OUTPUT "$RED  Restart the docker container $TAILS\n"
+    $OUTPUT "$RED  Restart all docker containers $TAILS\n"
     bash $ONEKEY_ENV_PATH/sh/docker/restart.sh
     exit
   ;;
   "login" )
-    $OUTPUT "$RED  Into the docker container $TAILS\n"
+    $OUTPUT "$RED  Into all docker containers $TAILS\n"
     bash $ONEKEY_ENV_PATH/sh/docker/login.sh $2
     exit
   ;;
   "stop" )
-    $OUTPUT "$RED  Stop the docker container $TAILS\n"
+    $OUTPUT "$RED  Stop all docker containers and then remove them $TAILS\n"
     bash $ONEKEY_ENV_PATH/sh/docker/stop.sh
     exit
   ;;
   "destroy" )
-    $OUTPUT "$RED  Delete the docker container $TAILS\n"
+    $OUTPUT "$RED  Remove all docker containers $TAILS\n"
     bash $ONEKEY_ENV_PATH/sh/docker/destroy.sh
     exit
   ;;
+  "rmi" )
+    $OUTPUT "$RED  Exec docker-compose down and then remove all related docker images $TAILS\n"
+    bash $ONEKEY_ENV_PATH/sh/docker/rmi.sh
+    exit
+  ;;
   "list" )
-    $OUTPUT "$RED  Show all the container $TAILS\n"
+    $OUTPUT "$RED  Show all the docker containers $TAILS\n"
     docker ps -a | grep onekey
     exit
   ;;
@@ -54,14 +59,15 @@ $OUTPUT "
   $BLUE$FLICKER Support onekey project develop $TAILS
 
   $YELLOW ONEKEY Docker Command: $TAILS
-    $WHITE onekey build <config> $TAILS  build docker config.
-    $WHITE onekey list $TAILS            show container list
-    $WHITE onekey start $TAILS           start container
-    $WHITE onekey restart $TAILS         restart container
-    $WHITE onekey stop $TAILS            stop container
+    $WHITE onekey build <config> $TAILS  build docker config and rebuild all docker images.
+    $WHITE onekey list $TAILS            show docker container list
+    $WHITE onekey start $TAILS           start all docker containers
+    $WHITE onekey restart $TAILS         restart all docker containers
+    $WHITE onekey stop $TAILS            stop all docker containers
     $WHITE onekey login $TAILS           into the container, option: [container name or id]
-    $WHITE onekey destroy $TAILS         destroy container and delete docker image
-    $WHITE onekey help $TAILS            commands list
+    $WHITE onekey destroy $TAILS         stop all docker containers and then remove them
+    $WHITE onekey rmi $TAILS             exec docker-compose down and then remove all related docker images
+    $WHITE onekey help $TAILS            command list
 
     "
     exit

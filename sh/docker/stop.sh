@@ -1,5 +1,4 @@
 #! /bin/bash
-cd `dirname $0`
 
 . $ONEKEY_ENV_PATH/sh/function.sh
 . $ONEKEY_ENV_PATH/sh/color.sh

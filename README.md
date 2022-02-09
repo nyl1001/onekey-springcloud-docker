@@ -71,13 +71,14 @@ seata在nacos上的配置信息
 
 ```
 // docker简单命令列表
-onekey build       重置配置信息，文件.env、seata/conf/registry.conf、docker-compose.yml均会被重置
+onekey build       重置配置信息和docker镜像，文件.env、seata/conf/registry.conf、docker-compose.yml均会被重置
 onekey list        显示当前onekey的容器列表
-onekey start       启动容器，启动后即可正常使用该容器进行coding
-onekey restart     重新启动容器；如果没有启动，会直接启动容器，此时与 onekey start 效果相同
-onekey stop        停止容器的运行
+onekey start       重建镜像后启动容器，启动后即可正常容器
+onekey restart     重新启动容器；如果没有启动，则会直接启动容器，注意此过程不会重建容器镜像
+onekey stop        停止运行所有相关容器
 onekey login       进入容器内部，需要指定容器名称
-onekey destroy     删除容器及镜像
+onekey destroy     停止并删除所有相关容器
+onekey rmi         删除所有相关容器镜像，谨慎操作
 onekey help        显示所有的命令列表
 
 ```

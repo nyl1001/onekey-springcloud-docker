@@ -1,5 +1,4 @@
 #! /bin/bash
-cd `dirname $0`
 
 . $ONEKEY_ENV_PATH/sh/function.sh
 . $ONEKEY_ENV_PATH/sh/color.sh
@@ -14,7 +13,7 @@ if [ $? = 1 ]; then
   "
   docker ps | grep onekey
 else
-  docker-compose -f $ONEKEY_ENV_PATH/docker-compose.yml up -d
+  docker-compose -f $ONEKEY_ENV_PATH/docker-compose.yml up --build  --remove-orphans -d
   $OUTPUT "
   $GREEN onekey tech docker environment start work, enjoy coding...
   "
