@@ -4,6 +4,9 @@ rootDir=$ONEKEY_ENV_PATH
 
 . ${rootDir}/sh/color.sh
 
+# 拷贝docker-compose文件
+cp $rootDir/docker-compose.yml.bak $rootDir/docker-compose.yml
+
 cp ${rootDir}/.env-default ${rootDir}/.env
 cp ${rootDir}/seata/conf/registry-default.conf ${rootDir}/seata/conf/registry.conf
 
@@ -58,5 +61,14 @@ while read line; do
         *) ;;
     esac
 done < ${rootDir}/.env
+
+# 检查网络
+checkNetworkExist
+if [ $? != 1 ]; then
+  docker network create onekeyenv_default
+else
+  docker network rm onekeyenv_default
+  docker network create onekeyenv_default
+fi
 
 $OUTPUT "$GREEN init docker config successfully"

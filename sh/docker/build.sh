@@ -5,9 +5,6 @@
 
 dir=$ONEKEY_ENV_PATH
 
-# 拷贝文件
-cp $dir/docker-compose.yml.bak $dir/docker-compose.yml
-
 # 初始化基础配置数据
 . $ONEKEY_ENV_PATH/sh/initConfig.sh
 

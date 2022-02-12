@@ -93,7 +93,7 @@ store.file.sessionReloadReadSize=100
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.jdbc.Driver
-store.db.url=jdbc:mysql://${HOST_IP}:${SEATA_MYSQL_PORT}/seata?useUnicode=true\&rewriteBatchedStatements=true
+store.db.url=jdbc:mysql://mysql-for-seata-onekey-standalone:3306/seata?useUnicode=true\&rewriteBatchedStatements=true
 store.db.user=seata
 store.db.password=seata
 

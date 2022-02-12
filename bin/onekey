@@ -53,6 +53,11 @@ case $command in
     docker ps -a | grep onekey
     exit
   ;;
+  "logs" )
+    $OUTPUT "$RED  Show docker container running logs $TAILS\n"
+    docker logs "${@:2}"
+    exit
+  ;;
   * )
 $OUTPUT "
   $BLUE$FLICKER Building a development environment for the onekey team using docker $TAILS
@@ -67,6 +72,7 @@ $OUTPUT "
     $WHITE onekey login $TAILS           into the container, option: [container name or id]
     $WHITE onekey destroy $TAILS         stop all docker containers and then remove them
     $WHITE onekey rmi $TAILS             exec docker-compose down and then remove all related docker images
+    $WHITE onekey logs $TAILS            Show docker container running logs
     $WHITE onekey help $TAILS            command list
 
     "

@@ -6,9 +6,6 @@ echo "###########################################################"
 echo "###########################################################"
 echo "###########################################################"
 # use while loop to check if nacos is running
-nacosStatuCheckUrl="http://${HOST_IP}:${COMMON_NACOS_PORT}/nacos/v1/cs/configs?dataId=${NACOS_STATUS_CHECK_KEY_FOR_SEATA}&tenant=${COMMON_NACOS_NAMESPACE_FOR_SEATA}&group=${COMMON_NACOS_GROUP_FOR_SEATA}"
-echo "nacosStatuCheckUrl : ${nacosStatuCheckUrl}"
-
 while true
 do
     netstat -uplnt | grep :8848 | grep LISTEN > /dev/null

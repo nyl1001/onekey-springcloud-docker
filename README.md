@@ -79,6 +79,7 @@ onekey stop        停止运行所有相关容器
 onekey login       进入容器内部，需要指定容器名称
 onekey destroy     停止并删除所有相关容器
 onekey rmi         删除所有相关容器镜像，谨慎操作
+onekey logs        查看容器运行日志，需要指定容器名称
 onekey help        显示所有的命令列表
 
 ```
