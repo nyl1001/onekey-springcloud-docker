@@ -103,7 +103,7 @@ services:
         - default
       environment:
         KAFKA_BROKER_ID: 0
-        KAFKA_ZOOKEEPER_CONNECT: zookeeper-onekey-standalone:2181
+        KAFKA_ZOOKEEPER_CONNECT: zookeeper-onekey-standalone:2181/kafka
         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST_IP}:9082
         KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
         KAFKA_CREATE_TOPICS: "onekey:2:1"   #kafka启动后初始化一个有2个partition(分区)1个副本名叫onekey的topic

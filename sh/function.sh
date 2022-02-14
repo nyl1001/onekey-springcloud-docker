@@ -45,7 +45,7 @@ function isStringInFile() {
 #检查网络
 function checkNetworkExist()
 {
-  net=`docker network ls | grep 'onekeyenv' | awk '{print $2}'`
+  net=`docker network ls | grep 'onekeyenv_default' | awk '{print $2}'`
   if [ -z "$net" ]; then
     return 0
   fi
