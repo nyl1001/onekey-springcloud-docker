@@ -11,6 +11,7 @@ case $sysType in
         if [ $? = 0 ]; then
             echo export ONEKEY_ENV_PATH="$ONEKEY_ENV_PATH" >> ~/.profile && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.profile
         fi
+        source ~/.profile
         ;;
     "Darwin")
         shellType=`echo $SHELL`
@@ -21,6 +22,7 @@ case $sysType in
                 echo export ONEKEY_ENV_PATH="$ONEKEY_ENV_PATH" >> ~/.bashrc && echo 'export PATH="$PATH:$ONEKEY_ENV_PATH/bin"' >> ~/.bashrc
             fi
             $OUTPUT "ONEKEY_ENV_PATH has been set to environment file ~/.bashrc..."
+            source ~/.bashrc
         elif [[ $shellType =~ "zsh" ]] || [[  $shellType =~ "-zsh" ]]; then
             if [ ! -f ~/.zshrc.pre-oh-my-zsh ]; then
                 isStringInFile ONEKEY_ENV_PATH ~/.zshrc
@@ -35,6 +37,7 @@ case $sysType in
                 fi
                 $OUTPUT "ONEKEY_ENV_PATH has been set to environment file ~/.zshrc.pre-oh-my-zsh..."
             fi
+            source ~/.zshrc
         fi
         ;;
     *)
